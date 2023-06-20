@@ -1,0 +1,16 @@
+.choices{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    gap: 10px;
+}
+.choice{
+    text-decoration: none;
+    color: black;
+    padding: 8px 15px;
+    background-color: var(--primary);
+    border-radius: 18px;
+    color: white;
+}

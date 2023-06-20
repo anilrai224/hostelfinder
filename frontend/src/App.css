@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica';
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+:root{
+    --primary:#7393b3;
+    --secondary:#db5c0b;
+    --third:#042C53;
+}
+.container{
+    width: 1250px;
+    margin: 0 auto;
+}
+@media (max-width:1250px) {
+    .container{
+        width: 100%;
+        padding: 0 20px;
+    }
+}
+.btn{
+    border-radius: 20px;
+    border: none;
+    width: 90px;
+    height: 40px;
+    background: #fff;
+    box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    text-decoration: none;
+}

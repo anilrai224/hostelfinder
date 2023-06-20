@@ -1,0 +1,32 @@
+.footer{
+    width: 100%;
+    background-image: url(../../images/footer.png);
+    background-color: #AFBDCB;
+    /* background: #AFBDCB; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 100px;
+}
+.link{
+    text-decoration: none;
+    border: none;
+    color: inherit;
+}
+.footer__contents{
+    display: grid;
+    gap: 50px;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    padding: 40px 0;
+}
+.footer__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.footer__content img{
+    width: 80px;
+    padding-bottom: 20px;
+}
+.footer__content h3{
+    padding-bottom: 20px;
+}

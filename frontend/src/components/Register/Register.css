@@ -1,0 +1,62 @@
+.register{
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+span{
+    color: var(--secondary);
+}
+.login__option{
+    text-decoration: none;
+}
+.register form{
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+form p{
+    padding-bottom: 5px;
+    font-weight: 400;
+    font-size: 17px;
+}
+form h5{
+    padding-bottom: 20px;
+}
+input:not([type="checkbox"]){
+    outline: none;
+    width: 100%;
+    height: 30px;
+    border-radius: 45px;
+    background: #DFEFFF;
+    border: 0.805188px solid #D9D9D9;
+    padding: 0 10px;
+    font-size: 17px;
+}
+input[type="submit"]{
+    width: max-content;
+    padding: 2px 25px;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border: 0.805188px solid #D9D9D9;
+    box-shadow: 0px 3.22075px 3.22075px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+.agreement{
+    display: flex;
+    padding-top: 10px;
+    gap: 5px;
+}
+.error{
+    display: none;
+    color: red;
+    font-size: 14px;
+}
+input:invalid[focused="true"] + .error{
+    display: block;
+}
+input[type='checkbox']:unchecked + .error{
+    display: block;
+}

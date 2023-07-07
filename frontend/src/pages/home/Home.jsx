@@ -1,10 +1,12 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom'
 import background_image from '../../images/landing_page/bckground_image.png'
 import aboutImg from '../../images/landing_page/about.png'
 import {FaFacebookF,FaTwitter,FaInstagram,FaPhoneAlt} from 'react-icons/fa'
 import {MdEmail} from 'react-icons/md'
 import {ImLocation2} from 'react-icons/im'
 import service1 from '../../images/service1.png'
+import hostel from '../../images/hostel-rent.png'
 import './Home.css'
 
 const Home = () => {
@@ -42,6 +44,7 @@ const Home = () => {
                 <div className="home__social-line">
                     
                 </div>
+                <p>Join Us</p>
             </div>
         </div>
     </div>
@@ -148,6 +151,20 @@ const Home = () => {
                 <div className="home__contact-right">
                     <iframe title='map' src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2041.579475341821!2d85.28464675688221!3d27.691809419283018!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2snp!4v1687003291453!5m2!1sen!2snp">
                     </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="hostel__rent">
+        <div className="container">
+            <div className="hostel__rent-contents">
+                <div className="hostel__rent-content">
+                    <h2>do you have <br/> hostel for rent?</h2>
+                    <p>list your hostel and connect with us</p>
+                    <NavLink to='/register/hostel' className='link'>Contact Us</NavLink>
+                </div>
+                <div className="hostel__rent-img">
+                    <img src={hostel} alt="" />
                 </div>
             </div>
         </div>

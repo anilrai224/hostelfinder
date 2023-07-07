@@ -14,6 +14,7 @@ import HLogin from './components/Login/HLogin'
 import SRegister from './components/Register/SRegister'
 import HRegister from './components/Register/HRegister'
 import Footer from './pages/footer/Footer'
+import Search from './pages/search/Search'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path='/about' element={<About/>}>About Us</Route>
             <Route path='/contact' element={<Contact/>}>Contact</Route>
             <Route path='/services' element={<Services/>}>Services</Route>
+            <Route path='/search' element={<Search/>}>Search</Route>
             <Route path='/faq' element={<Faq/>}>Faq</Route>
             <Route path='/login' element={<LoginChoice/>}/>
             <Route path='/register' element={<RegisterChoice/>}/>

@@ -1,0 +1,159 @@
+.searchOpt{
+    position: relative;
+    top: 150px;
+    padding-bottom: 100px;
+}
+.searchOpt img{
+    position: absolute;
+    top: -140px;
+}
+.search__contents{
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+.search__contents form{
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(223, 239, 255, 1);
+    padding: 20px;
+    height: max-content;
+}
+form h2{
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--secondary);
+    border-bottom: 2px solid black;
+    padding: 10px 0;
+}
+form p{
+    padding: 10px 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: flex;
+    gap: 3px;
+    color: black;
+}
+form .hostel_types{
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 2px solid black;
+}
+.hostel_types div{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.hostel_types div:nth-child(2){
+    padding-bottom: 10px;
+}
+.hostel_types span{
+    color: black;
+}
+form .location .input{
+    position: relative;
+    width: 100%;
+}
+.location .input input{
+    border-radius: 0%;
+    background-color: white;
+}
+form .location .licon{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+form .price{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+.price .budget{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.price .budget p{
+    font-size: 14px;
+}
+.price label:nth-child(1){
+    margin-right: 4px;
+}
+.price .budget input{
+    background-color: white;
+    border-radius: 0%;
+    color: black;
+}
+form .prange{
+    width: 90%;
+    position: relative;
+    margin-bottom: 10px;
+}
+/* form .prange::after{
+    content: '';
+    position: absolute;
+    border: 5px solid black;
+    right: 0;
+    top: 0;
+    height: 18px;
+    width:18px;
+    border-radius: 50%;
+    background-color: white;
+    display: grid;
+    place-items: center;
+}
+form .prange::before{
+    content: '';
+    position: absolute;
+    border: 5px solid black;
+    left: 0;
+    top: 0;
+    height: 18px;
+    width:18px;
+    border-radius: 50%;
+    background-color: white;
+    display: grid;
+    place-items: center;
+} */
+form .range{
+    width: 70px;
+    margin-left: 3px;
+    background-color: white;
+    font-size: 14px;
+    color: black;
+    border-radius: 0%;
+}
+form .range:nth-child(1){
+    margin-right: 20px;
+}
+.price label:nth-child(2) .budget p::before{
+    content: '-';
+    padding-right: 5px;
+    font-weight: bold;
+}
+form select{
+    height: 30px;
+    outline: none;
+}
+.search__results{
+    width: 100%;
+}
+input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #000;
+    border-radius: 0;
+  }
+  
+  input[type="radio"]:checked {
+    background-color: #000;
+  }
+  

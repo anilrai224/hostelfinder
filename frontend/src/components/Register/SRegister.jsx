@@ -9,9 +9,17 @@ const SRegister = () => {
   const [password,setPassword] = useState('');
   const [phone,setPhone] = useState('');
 
-  const [focused,setFocused] = useState(false);
-  const handleFocus=()=>{
-    setFocused(true);
+  const [emailFocus,setEmailFocus] = useState(false);
+  const [passFocus,setPassFocus] = useState(false);
+  const [conPassFocus,setConPassFocus] = useState(false);
+  const handleEmailFocus=()=>{
+    setEmailFocus(true);
+  }
+  const handlePassFocus=()=>{
+    setPassFocus(true);
+  }
+  const handleConPassFocus = ()=>{
+    setConPassFocus(true);
   }
 
   const navigate = useNavigate();
@@ -40,17 +48,17 @@ const SRegister = () => {
         </label>
         <label htmlFor="email">
           <p>Email</p>
-          <input onBlur={handleFocus} focused={focused.toString()} required type="email" onChange={e=>setEmail(e.target.value)} name="email" id="email"  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
+          <input onBlur={handleEmailFocus} focused={emailFocus.toString()} required type="email" onChange={e=>setEmail(e.target.value)} name="email" id="email"  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
           <span className='error'>Enter Valid Emai address</span>
         </label>
         <label htmlFor="password">
           <p>Password</p>
-          <input onBlur={handleFocus} focused={focused.toString()} required type="text" onChange={e=>setPassword(e.target.value)} name="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
+          <input onBlur={handlePassFocus} focused={passFocus.toString()} required type="text" onChange={e=>setPassword(e.target.value)} name="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
           <span className='error'>Minimum eight characters, at least one letter and one number</span>
         </label>
         <label htmlFor="cpassword">
           <p>Confirm Password</p>
-          <input onBlur={handleFocus} focused={focused.toString()} required type="text" name="cpassword" id="cpassword" pattern={password}/>
+          <input onBlur={handleConPassFocus} focused={conPassFocus.toString()} required type="text" name="cpassword" id="cpassword" pattern={password}/>
           <span className='error'>Password Doesn't Match</span>
         </label>
         <label htmlFor="agreement" className='agreement'>

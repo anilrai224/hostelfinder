@@ -27,7 +27,7 @@ header .logo{
 }
 .nav__links{
     display: flex;
-    gap: 15px;
+    gap: 42px;
 }
 .nav__links .nav__link{
     text-decoration: none;
@@ -36,7 +36,7 @@ header .logo{
 }
 .login__register{
     display: flex;
-    gap: 10px;
+    gap: 22px;
 }
 .login__register .link{
     font-weight: 700;
@@ -75,8 +75,9 @@ header .logo{
         flex-direction: column;
         align-items: center;
         padding-top: 20vh;
-        transform: translateY(250vh);
+        transform: translateY(150vh);
         transition: 1s;
+        z-index: 3;
     }
     .nav__links.responsive {
         transform: none;

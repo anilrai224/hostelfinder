@@ -72,6 +72,7 @@ const Header = () => {
             <NavLink to="/services" className="nav__link">
               Services
             </NavLink>
+            <NavLink to="/search" className="nav__link">Search</NavLink>
             <NavLink to="/contact" className="nav__link">
               Contact
             </NavLink>

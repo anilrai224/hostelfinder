@@ -1,11 +1,13 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 import logo from '../../images/logo.png'
+import footerImg from '../../images/footer.png'
 import './Footer.css'
 
 const Footer = () => {
   return (
     <div className='footer'>
+        <img src={footerImg} className='footer-img' alt="footer" />
         <div className="container">
             <div className="footer__contents">
                 <div className="footer__content">
@@ -36,6 +38,9 @@ const Footer = () => {
                     <h3>About Us</h3>
                     <p>At Hostel Finder, we are dedicated to providing student-friendly accommodations that combine comfort, affordability, and a vibrant community.</p>
                 </div> */}
+            </div>
+            <div className="copyright">
+                <p><span>Copyright &copy; 2023</span> All Rights Reserved By <span>hostelfinder.com</span></p>
             </div>
         </div>
     </div>

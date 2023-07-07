@@ -21,6 +21,7 @@
     padding-top: 40px;
     width: 100%;
     height: 100%;
+    justify-content: center;
 }
 .home__about .home__buttons{
     display: flex;
@@ -107,11 +108,17 @@
     color: rgb(255, 25, 64);
 }
 .home__social .home__social-line{
-    width: 100%;
+    width: 75%;
     border-bottom: 1px solid rgb(65, 65, 181);
     display: flex;
     place-items: center;
     margin-bottom: 20px;
+}
+.home__social p{
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    font-weight: bold;
 }
 
 /*About us*/
@@ -210,8 +217,14 @@
     .home__service{
         flex-direction: column;
     }
-    .home__service:nth-child(even){
-        flex-direction: column-reverse;
+    .home__service-img,.home__service-desc{
+        width: 100%;
+    }
+    .home__service-desc{
+        padding: 20px;
+    }
+    .home__service:nth-of-type(even){
+        flex-direction: column;
     }
     .home__services-contents{
         gap: 10px;
@@ -308,6 +321,58 @@
 }
 @media (max-width:770px){
     .home__contact{
+        width: 100%;
+    }
+}
+
+/*hostel rent*/
+.hostel__rent{
+    width: 100%;
+    margin-top: 100px;
+}
+.hostel__rent-contents{
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    align-items: center;
+}
+.hostel__rent-content{
+    background-color: #E3F1FF;
+    padding: 30px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.hostel__rent-content h2{
+    text-transform: uppercase;
+}
+.hostel__rent-content p{
+    text-transform: capitalize;
+}
+.hostel__rent-content .link{
+    padding: 10px 20px;
+    width: max-content;
+    border-radius: 20px;
+    background-color: var(--secondary);
+    cursor: pointer;
+    color: white;
+}
+.hostel__rent-img{
+    background-color: green;
+    width: 50%;
+    height: 300px;
+}
+.hostel__rent-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (max-width:803px) {
+    .hostel__rent-contents{
+        flex-direction: column-reverse;
+    }
+    .hostel__rent-content,.hostel__rent-img{
         width: 100%;
     }
 }

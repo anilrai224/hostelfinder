@@ -16,6 +16,7 @@ span{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-top: 40px;
 }
 form p{
     padding-bottom: 5px;
@@ -60,4 +61,25 @@ input:invalid[focused="true"] + .error{
 }
 input[type='checkbox']:unchecked + .error{
     display: block;
+}
+
+.form{
+    display: flex;
+    gap: 20px;
+}
+form .password{
+    position: relative;
+}
+form .show-pass{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 20px;
+    color: var(--secondary);
+}
+form .show-pass:hover{
+    cursor: pointer;
+}
+form .Cpass{
+    position: relative;
 }

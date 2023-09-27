@@ -1,0 +1,45 @@
+.hprofile-nav{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(223, 239, 255, 1);
+    padding: 20px;
+    border: 1px solid rgba(184, 183, 184, 1);
+    border-radius: 10px;
+    width: 300px;
+}
+.hprofile-nav .profile-navList{
+    font-weight: bold;
+}
+.hprofile-nav .profile-navList:nth-child(1){
+    display: flex;
+    text-decoration: none;
+    color: black;
+    gap: 10px;
+    font-size: 19px;
+    border: 1px solid rgba(184, 183, 184, 1);
+    border-radius: 30px;
+    padding: 10px;
+    align-items: center;
+    font-size: 17px;
+}
+.hprofile-nav .profile-navList{
+    border: none;
+}
+.hprofile-nav .icon{
+    font-size: 30px;
+    font-weight: normal;
+}
+.profile-dropdown{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+.profile-dropdown .drop-down-menu{
+    text-decoration: none;
+    color: gray;
+    font-weight: bold;
+}
+.profile-dropdown.shows{
+    display: flex;
+}

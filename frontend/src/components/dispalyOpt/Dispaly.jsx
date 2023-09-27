@@ -4,22 +4,22 @@ import {ImLocation2} from 'react-icons/im'
 import './Dispaly.css'
 import axios from 'axios'
 
-const Dispaly = () => {
+const Dispaly = (props) => {
+    const [hostels,setHostels] = useState([]);
 
-  // const [hostel,setHostel] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get('http://localhost:3001/service')
-  //     .then((res) => {
-  //       setHostel(res.data);
-  //       console.log(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get('http://localhost:3031/search')
+      .then((res) => {
+        setHostels(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="display__hostel">
-      {/* {hostel.map((hostel)=>{
+
+      {hostels.map((hostel)=>{
         //converting json(of database type) type in objects
         const seaterOptions = JSON.parse(hostel.seater);
         return(
@@ -35,8 +35,8 @@ const Dispaly = () => {
             </div>
           </div>
         );
-      })} */}
-      <h1>display</h1>
+      })}
+      <h1>Display</h1>
     </div>
   )
 }

@@ -1,0 +1,32 @@
+.security{
+    width: 100%;
+}
+.security-body{
+    border: 1px solid rgba(199, 204, 211, 1);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    border-radius: 10px;
+}
+.security-body .lock-icon{
+    height: 50px;
+    width: 50px;
+    background-color: rgba(223, 239, 255, 1);
+    font-size: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--secondary);
+}
+.security-body > p{
+    font-weight: bold;
+}
+.security-body >span{
+    color: black;
+    font-size: 13px;
+}
+.security-body  label input{
+    width: 300px;
+}

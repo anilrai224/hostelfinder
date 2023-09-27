@@ -1,0 +1,109 @@
+.account-setting{
+    width: 100%;
+}
+.account-setting p{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+form input{
+    color: rgba(138, 146, 154, 1);
+}
+.first-form,.second-form{
+    border: 1px solid rgba(166, 161, 161, 1);
+}
+.img-form{
+    background-color: rgba(223, 239, 255, 1);
+    padding: 20px;
+    gap: 20px;
+    border: 1px solid rgba(166, 161, 161, 1);
+    border-radius: 10px;
+    display: flex;
+    gap: 50px;
+}
+.img-form .your-img{
+    height: 100px;
+    width: 100px;
+}
+.your-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.img-form .img-input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.img-form .input-img{
+    display: none;
+}
+.img-file{
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid rgba(138, 146, 154, 1);
+    padding: 5px 10px;
+    background-color: rgba(223, 239, 255, 1);
+}
+.camera{
+    font-size: 30px;
+}
+.img-input .img-icon{
+    font-size: 50px;
+    color: rgba(148, 157, 167, 1);
+}
+.img-input p{
+    font-size: 19px;
+    font-weight:normal;
+    color: rgba(148, 157, 167, 1);
+    text-transform: none;
+}
+.img-input span{
+    font-size: 18px;
+    color: rgba(148, 157, 167, 1);
+    margin: -15px 0 5px 0;
+}
+.img-input span::before{
+    content: '---------------------   ';
+}
+.img-input span::after{
+    content: '   ---------------------';
+}
+.first-form >p,.second-form >p{
+    font-weight: bold;
+    text-transform: capitalize;
+}
+form .gender{
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 0 5px;
+}
+form label>p{
+    color: rgba(138, 146, 154, 1);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.first-form,.second-form{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(223, 239, 255, 1);
+    padding: 20px;
+    border-radius: 10px;
+}
+.first-form > div,.second-form >div{
+    display: flex;
+    gap: 50px;
+}
+
+form input[type="submit"]{
+    background-color: var(--secondary);
+    color: white;
+    padding: 5px 20px;
+}

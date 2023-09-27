@@ -4,7 +4,7 @@ import './Choice.css'
 
 const LoginChoice = () => {
   return (
-    <div class='choices'>
+    <div className='choices'>
       <NavLink to='/register/student' className='choice'>as a Student</NavLink>
       <NavLink to='/register/hostel' className='choice'>as a Hostel Owner</NavLink>
     </div>

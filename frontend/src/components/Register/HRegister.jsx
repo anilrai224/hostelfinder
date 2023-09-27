@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Register.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import axios from 'axios'
 
 const SRegister = () => {
@@ -27,9 +28,25 @@ const SRegister = () => {
   const handleSubmit = (e)=>{
     e.preventDefault();
     axios
-    .post('http://localhost:3001/register/student',{name,email,password,phone})
+    .post('http://localhost:3031/register/hostel',{name,email,password,phone})
     .then(res=>{
       navigate('/login/hostel');
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer:3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Registered Successfully.'
+      })
     })
     .catch(err=>console.log(err));
   }

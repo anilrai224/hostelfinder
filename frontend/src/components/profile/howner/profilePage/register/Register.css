@@ -1,0 +1,104 @@
+.register_hostel{
+    width: 100%;
+}
+.register_hostel .hostel_info{
+    display: flex;
+    flex-direction: column;
+}
+.hostel_info >p{
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: 'Helvetica';
+    font-weight: bold;
+}
+.hostel_info .hostel_info_inputs{
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+.hostel_info_inputs label{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.hostel_info_inputs label > span{
+    color: rgba(138, 146, 154, 1);
+}
+.hostel_info_inputs label input{
+    background-color: transparent;
+}
+.hostel_info_inputs label select{
+    background-color: transparent;
+    border-radius: 20px;
+    width: 100%;
+}
+.hostel_seater{
+    width: 100%;
+}
+.hostel_seater > p{
+    margin-top: 50px;
+    text-transform: capitalize;
+    font-family: 'Helvetica';
+    font-weight: bold;
+    font-size: 20px;
+}
+.hostel_seater_inputs{
+    /* display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); */
+    display: flex;
+    gap: 30px;
+    border: 1.5px solid rgba(138, 146, 154, 1);
+    width: max-content;
+    padding: 10px 30px;
+}
+.hostel_seater_inputs div:first-child{
+    border: 1px solid rgba(138, 146, 154, 1);
+    height: max-content;
+}
+.hostel_seater_inputs div:first-child p{
+    border-bottom: 1px solid rgba(138, 146, 154, 1);
+    background-color: rgba(223, 239, 255, 1);
+    height: 100%;
+    padding-bottom: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.hostel_seater_inputs div:not(:first-child){
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* margin-top: 10px; */
+    background-color: rgba(223, 239, 255, 1);
+    padding: 10px;
+    width: 80px;
+    border: 1px solid rgba(138, 146, 154, 1);
+}
+.hostel_seater_inputs div:not(:first-child) label{
+    display: flex;
+    gap: 10px;
+}
+.hostel_seater_inputs div:not(:first-child) input{
+    border-radius: 0px;
+    background-color: white;
+    border-color: rgba(138, 146, 154, 1);
+}
+
+.hostel_facilities{
+    width: 100%;
+    margin-top: 70px;
+}
+.hostel_facilities>p{
+    text-transform: uppercase;
+}
+.hostel_facilities_inputs{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+}
+.hostel_facilities_inputs label{
+    display: flex;
+    gap: 10px;
+}
+.hostel_facilities_inputs label >span{
+    color: rgba(176, 172, 172, 1);
+}

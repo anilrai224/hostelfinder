@@ -12,6 +12,29 @@
     display: flex;
     gap: 30px;
 }
+@media (max-width:586px) {
+    .search__contents{
+        flex-direction: column;
+    }
+    .searchOpt .form_img{
+        display: none;
+        top: 0;
+    }
+    .search__contents .search__inputs{
+        width: 100%;
+    }
+    .search__inputs{
+        gap: 10px;
+        font-size: 19px;
+        margin-top: -100px;
+    }
+    .search__inputs label,.search__inputs p{
+        font-size: 22px;
+    }
+    .search__inputs input, .search__inputs select{
+        height: 40px;
+    }
+}
 .search__contents form{
     width: 270px;
     display: flex;
@@ -156,4 +179,65 @@ input[type="radio"] {
   input[type="radio"]:checked {
     background-color: #000;
   }
-  
+  .display__hostel{
+    /* display: grid;
+    gap: 10px; */
+    /* grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.display__hostel .hostelNotFound{
+    display: grid;
+    place-items: center;
+}
+.hostel{
+    box-shadow: 0px 3px 18px 2px rgba(218, 224, 231, 1);
+    height: 350px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 32%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+@media (max-width:1005px) {
+    .hostel{
+        width: 48%;
+    }
+}
+@media (max-width:770px) {
+    .hostel{
+        width: 98%;
+    }
+}
+.hostel img{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    height: 60%;
+    width: 100%;
+    object-fit: cover;
+}
+.hostel .hostel__desc{
+    padding-left: 20px;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    gap: 5px;
+    bottom: 10px;
+}
+.hostel__desc .loc{
+    display: flex;
+}  
+.hostel__desc .view-hostel{
+    width: max-content;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: black;
+    background-color: var(--primary);
+    margin-top: 10px;
+}

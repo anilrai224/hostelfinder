@@ -15,10 +15,18 @@ import SRegister from './components/Register/SRegister'
 import HRegister from './components/Register/HRegister'
 import Footer from './pages/footer/Footer'
 import Search from './pages/search/Search'
+import MainProfile from './components/profile/student/MainProfile/MainProfile'
+import HMainProfile from './components/profile/howner/MainProfile/MainProfile'
+import { DetailProvider } from './components/detailProvider/DetailProvider'
+import LoginError from './pages/loginError/LoginError'
+
+import NotFound from './pages/notFound/NotFound'
+import HostelDetail from './pages/hosteldetail/HostelDetail'
 
 const App = () => {
   return (
     <>
+      <DetailProvider>
         <Header/>
         <Routes>
             <Route path='/' element={<Home/>}>Home</Route>
@@ -33,8 +41,14 @@ const App = () => {
             <Route path='/login/hostel' element={<HLogin/>}/>
             <Route path='/register/student' element={<SRegister/>}/>
             <Route path='/register/hostel' element={<HRegister/>}/>
+            <Route path='/student/*' element={<MainProfile/>}/>
+            <Route path='/error' element={<LoginError/>}/>
+            <Route path='/howner/*' element={<HMainProfile/>}/>
+            <Route path='/search/:id' element={<HostelDetail/>}/>
+            <Route path='*' element={<NotFound/>}/>
         </Routes>
-      <Footer/>
+        <Footer/>
+      </DetailProvider>
     </>
   )
 }

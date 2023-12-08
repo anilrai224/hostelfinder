@@ -98,7 +98,7 @@ const SLogin = () => {
         <label className='password' htmlFor="password">
         {showPassword
             ?<AiFillEye className='show-pass' onClick={showPass}/>:
-             <VscEyeClosed className='show-pass' onClick={showPass}></VscEyeClosed>
+             <VscEyeClosed className='show-pass' onClick={showPass}/>
           }
           <p>Password</p>
           <input onChange={e=>setPassword(e.target.value)} type="password" className='inputpassword' name="Lpassword" id="Lpassword" />

@@ -10,29 +10,23 @@ import { DetailContext } from '../detailProvider/DetailProvider';
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const navRef = useRef();
+
   const handleResize=()=>{
     const width=window.innerWidth;
     if(width<=729){
       //taking all the nav list 
       const navLinks = document.querySelectorAll('.nav__link')
       navLinks.forEach((link)=>{
-        //adding event listener in each link
         link.addEventListener('click',()=>{
-          //when user open navigation in responsive view
-          //then when user click on any link 
-          //the responsive window should be on default 
-          document.querySelector('.nav__links').classList.remove('responsive');
+          document.querySelector('nav').classList.remove('responsive');
           document.querySelector('.login__register').classList.remove('responsive');
-           //setting isNavOpen to false because when user click
-          //on any link of responisve mode the isNavOpen is set to
-          //true which means when user click on bar btn it doesnot open in responsive but to get reponsive next time when user click on bar we must set isnavopen to false;
-          //icon 
-          setIsNavOpen(false);
+          setIsNavOpen(true);
         })
       })
     }
   }
   window.addEventListener('resize',handleResize)
+
   
   const showNavBar = () => {
     setIsNavOpen(!isNavOpen);
@@ -46,6 +40,11 @@ const Header = () => {
     setIsLoggedIn(false);
     navigate('/');
     localStorage.clear();
+  }
+
+  const removeBtn =()=>{
+    document.querySelector('nav').classList.remove('responsive');
+    document.querySelector('.login__register').classList.remove('responsive')
   }
 
   if(!detail){
@@ -94,8 +93,6 @@ const Header = () => {
               <div className="currentAccount-img">
                 <img src={imageSource} alt="Profile" />
               </div>
-              {/* <p>{detail.name}</p>
-              <span>{detail.name[0]}</span> */}
               <div className="account__option">
                 <NavLink to={`/${loggedInType}/profile`} className='link'>Dashboard</NavLink>
                 <p onClick={handleLogOut} className='link'>Logout</p>
@@ -103,8 +100,8 @@ const Header = () => {
             </div>
             :
             <div className={`login__register ${isNavOpen ? 'responsive' :''}`}>
-              <NavLink to='/login' className="btn link btn-login" >Login</NavLink>
-              <NavLink to='/register' className="btn link btn-register" >Register</NavLink>
+              <NavLink to='/login' onClick={removeBtn} className="btn link btn-login" >Login</NavLink>
+              <NavLink to='/register' onClick={removeBtn} className="btn link btn-register" >Register</NavLink>
             </div>
           }
         </div>

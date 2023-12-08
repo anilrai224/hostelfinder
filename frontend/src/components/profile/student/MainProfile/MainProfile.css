@@ -15,3 +15,12 @@
         padding: 20px 10px;
     }
 }
+@media (max-width:655px) {
+    .main-profile .container .main-profile-content{
+        flex-direction: column;
+    }
+    .main-profile .container .main-profile-content .profileNav{
+        width: 100%;
+        background-color: red;
+    }
+}

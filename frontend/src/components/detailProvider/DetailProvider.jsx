@@ -9,13 +9,16 @@ export const DetailProvider = (props) => {
   const [isLoggedIn,setIsLoggedIn] = useState(false);
   const [detail,setDetail] = useState();//for student
 
-  // const [ownerDetail,setOwnerDetail] = useState();
+  const [hostelReg,setHostelReg] = useState(false);
   
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(()=>{
     const loginType = localStorage.logintype;
+    const isLoggedInUser = localStorage.loginStatus;
+    setIsLoggedIn(isLoggedInUser);
     const uid=localStorage.getItem('uid');
+
     if(loginType==='student'){
       axios.post('http://localhost:3031/user',{uid})
       .then(res=>{
@@ -31,6 +34,11 @@ export const DetailProvider = (props) => {
       axios.post('http://localhost:3031/huser',{uid})
       .then(res=>{
         setDetail(res.data);
+        if(res.data.hostelReg === 1){
+          setHostelReg(true);
+        }else{
+          setHostelReg(false);
+        }
         const loginStatus = localStorage.getItem('loginStatus');
         setIsLoggedIn(loginStatus);
         const logintype=localStorage.getItem('logintype');
@@ -53,10 +61,12 @@ export const DetailProvider = (props) => {
       // console.log('user already logged in');
       navigate('/');
     }
+    if(userLoggedIn !== 'true' && location.pathname.includes('profile')){
+      navigate('/login');
+    }
   },[location.pathname,navigate]) 
   //this dependencies may cause error
-
-  const values = {detail,setDetail,isLoggedIn,setIsLoggedIn,loggedInType,setLoggedInType};
+  const values = {detail,setDetail,isLoggedIn,setIsLoggedIn,loggedInType,setLoggedInType,hostelReg,setHostelReg};
 
   return (
     <DetailContext.Provider value={values}>

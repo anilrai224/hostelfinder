@@ -1,0 +1,27 @@
+.booking{
+    width: 100%;
+}
+.booking h2{
+    padding-bottom: 20px;
+}
+.booking .table{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.booking .table > div{
+    display: flex;
+}
+.table > div .th{
+    padding: 10px;
+    display: grid;
+    place-items: center;
+    border: 1px solid black;
+    width: 100px;
+    background-color: var(--primary);
+}
+.table >div .td{
+    width: 100px;
+    text-align: center;
+    border: 1px solid black;
+}

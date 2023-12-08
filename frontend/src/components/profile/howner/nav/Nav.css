@@ -43,3 +43,18 @@
 .profile-dropdown.shows{
     display: flex;
 }
+@media (max-width:655px) {
+    .hprofile-nav{
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+
+    }
+    .hprofile-nav .icon{
+        font-size: 40px;
+        font-weight: normal;
+    }
+    .hprofile-nav .profile-navList p{
+        display: none;
+    }
+}

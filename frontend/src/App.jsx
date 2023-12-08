@@ -19,7 +19,6 @@ import MainProfile from './components/profile/student/MainProfile/MainProfile'
 import HMainProfile from './components/profile/howner/MainProfile/MainProfile'
 import { DetailProvider } from './components/detailProvider/DetailProvider'
 import LoginError from './pages/loginError/LoginError'
-
 import NotFound from './pages/notFound/NotFound'
 import HostelDetail from './pages/hosteldetail/HostelDetail'
 

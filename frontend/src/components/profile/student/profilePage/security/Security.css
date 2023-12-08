@@ -28,5 +28,19 @@
     font-size: 13px;
 }
 .security-body  label input{
-    width: 300px;
+    width: 70%;
+}
+form .confirmpass{
+    position: relative;
+}
+form .show-pass{
+    position: absolute;
+    right: 35%;
+}
+form .newpass{
+    position: relative;
+}
+form .show-pass{
+    position: absolute;
+    right: 35%;
 }

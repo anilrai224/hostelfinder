@@ -39,7 +39,6 @@ const Account = () => {
     formData.append('city', city);
     formData.append('id', id);
     formData.append('image', file);
-    console.log(email,bio,gender,dob,country,paddress,taddress,city,id,file.name);
 
     axios.post("http://localhost:3031/student/account", formData)
     .then(res => {
@@ -60,9 +59,7 @@ const Account = () => {
           icon: 'success',
           title: 'Detail Changed Successfully'
         })
-      // console.log(res.data);
       const loginType= localStorage.logintype;
-      console.log(loginType)
       navigate(`/${loginType}/profile`);
     })
     .catch(err => console.log(err));

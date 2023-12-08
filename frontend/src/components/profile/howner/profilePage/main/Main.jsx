@@ -12,11 +12,12 @@ const Main = () => {
     navigate('/howner/edit')
   }
   const {detail} = useContext(DetailContext);
-  console.log(detail);
+  // console.log(detail);
 
   // When the Main component loads, the useEffect in DetailProvider is still fetching the data, and detail might not have been set yet. As a result, detail.name or any other properties will be undefined initially, causing an error.
   //so if detail is not fetched then we return Loading to the page...
   if(!detail){
+    //later use loading animations
     return <p>Loading.....</p>;
   }
   //defining image source
@@ -27,7 +28,6 @@ const Main = () => {
       <div className="profile-details">
         <div className="first-profile">
           <div className="profile-img">
-            {/* <img src={defaultProfile} className='img' alt="" /> */}
             <img src={imageSource} alt="Profile" />
           </div>
             <div className="profile-desc">

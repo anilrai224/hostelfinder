@@ -37,3 +37,19 @@
         width: max-content;
     }
 }
+
+@media (max-width:655px) {
+    .profile-nav{
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+
+    }
+    .profile-nav .icon{
+        font-size: 40px;
+        font-weight: normal;
+    }
+    .profile-nav .profile-navList p{
+        display: none;
+    }
+}

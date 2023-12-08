@@ -4,12 +4,12 @@
   import {ImLocation2} from 'react-icons/im'
   import bed from '../../images/bed.png'
   import { DetailContext } from '../../components/detailProvider/DetailProvider'
+  import Swal from 'sweetalert2'
   import axios from 'axios';
 
   const HostelDetail = () => {
     const navigate = useNavigate();
-    //isLoggedIn is not recognized in this 
-    const {isLoggedIn} = useContext(DetailContext);
+    const {isLoggedIn,detail} = useContext(DetailContext);
     const [hostel,setHostel] = useState();
 
       const {id} = useParams();
@@ -17,15 +17,61 @@
         axios.get(`http://localhost:3031/search/${id}`)
             .then(res => {
                 setHostel(res.data[0]);
-                console.log(res.data[0])
+                // console.log(res.data[0])
               })
               .catch(err => console.log(err));
             }, [id]);
-            if(!hostel){
-              return <p>Loading....</p>
+          if(!hostel){
+            return <p>Loading....</p>
+          }
+          const dat= JSON.parse(hostel.seats_details);
+          const facilities = JSON.parse(hostel.facilities);
+        
+        const handleBooking = (e,seater,totalSeat)=>{
+          e.preventDefault();
+          const hid=id; //howner id
+          const std_id=detail.id;
+          const seat = seater; //seat to be booked
+          axios.post('http://localhost:3031/api/bookHostel',{hid,seat,std_id})
+          .then(res=>{
+            if(res.data === "Booked"){
+              const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer:3000,
+                  timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Hostel Has been Booked.'
+                  })
+            }else{
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer:3000,
+                timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                  }
+                })
+                
+                Toast.fire({
+                  icon: 'error',
+                  title: 'Hostel Has been Booked Already.'
+                })
             }
-            const dat= JSON.parse(hostel.seats_details);
-            const facilities = JSON.parse(hostel.facilities);
+          })
+          .catch(err=>console.log(err))
+        }
     return (
       <div className='hostel-detail'>
         <div className="container">
@@ -69,6 +115,7 @@
                         <p>{room.tseat} BEDS AVAILABLE NOW</p>
                         <span>Price Per Bed : {room.tprice}/-</span>
                         <div className="total_seat">{room.seat} Seater</div>
+                        <button className='book_hostel' onClick={(e)=>handleBooking(e,room.seat,room.tseat)}>Book Hostel</button>
                     </div>
                   )
                 })
@@ -79,7 +126,7 @@
               <p>HOSTEL FACILITIES</p>
               <div className="available_facilities">
                 {facilities.map(facility=>
-                  <p>{facility}</p>
+                  <p key={Math.random()}>{facility}</p>
                 )}
               </div>
             </div>

@@ -1,12 +1,25 @@
-import React,{useState} from 'react'
+import React,{useContext, useState,useEffect} from 'react'
 import {MdPhotoSizeSelectLarge} from 'react-icons/md'
 import {AiOutlineCamera} from 'react-icons/ai'
 import defaultProfile from '../../../../../images/profile.jpg'
 import {useNavigate} from 'react-router-dom'
+import { DetailContext } from '../../../../detailProvider/DetailProvider'
 import './Register.css'
+import Swal from 'sweetalert2'
 import axios from 'axios'
 
 const Register = () => {
+  const {detail,hostelReg,setHostelReg} = useContext(DetailContext);
+  // console.log(detail)
+  // console.log(hostelReg)
+  useEffect(() => {
+    if (detail) {
+      const isHostelReg = detail.hostelReg;
+      if (isHostelReg === 1) {
+        setHostelReg(true);
+      }
+    }
+  }, [detail, setHostelReg]);
   const navigate = useNavigate();
   const [name,setName] = useState();
   const [address,setAddress] = useState();
@@ -21,10 +34,10 @@ const Register = () => {
   const handleImage = (e) => {
     //may be we should write e.trager.files[0].filename
     setFile(e.target.files[0])
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     const image = document.getElementsByClassName('img')[0];
     const input = document.getElementsByClassName('input-img')[0];
-    console.log(image);
+    // console.log(image);
     image.src = URL.createObjectURL(input.files[0]);
   };
 
@@ -52,54 +65,102 @@ const Register = () => {
       }
     });
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const hostelSeaterInputs = document.querySelectorAll('.hostel_seater_inputs input[type="checkbox"]');
-    const hostelSeaterData = [];
+    
+      const hostelSeaterInputs = document.querySelectorAll('.hostel_seater_inputs input[type="checkbox"]');
+      const hostelSeaterData = [];
 
-    hostelSeaterInputs.forEach((input) => {
-      const checkboxName = input.name;
-      const isChecked = input.checked;
+      hostelSeaterInputs.forEach((input) => {
+        const checkboxName = input.name;
+        const isChecked = input.checked;
 
-      if (isChecked) {
-        const totalseat = total[`t${checkboxName}seat`];
-        const totalprice = total[`t${checkboxName}price`];
+        if (isChecked) {
+          const totalseat = total[`t${checkboxName}seat`];
+          const totalprice = total[`t${checkboxName}price`];
 
-        hostelSeaterData.push({
-          seat: checkboxName,
-          tseat: totalseat,
-          tprice: totalprice,
-        });
+          hostelSeaterData.push({
+            seat: checkboxName,
+            tseat: totalseat,
+            tprice: totalprice,
+          });
+        }
+      });
+
+      const collectedSeats = hostelSeaterData.map((data) => {
+        return {
+          seat: data.seat,
+          tseat: data.tseat,
+          tprice: data.tprice,
+        };
+      });
+      // setSeats(collectedSeats);
+      setSeats((prevSeats) => [...prevSeats, ...collectedSeats]);
+      // console.log(seats)
+
+    if(!hostelReg){
+      const formData = new FormData();
+      //using same id of howner for his hostel 
+      const id=detail.id;
+      formData.append('id',id);
+      formData.append('name',name)
+      formData.append('address',address)
+      formData.append('people',people)
+      formData.append('tole',tole)
+      formData.append('type',type)
+      formData.append('rooms',rooms)
+      formData.append('facilities',JSON.stringify(facilities))
+      formData.append('seats',JSON.stringify(seats))
+      formData.append('image',file)
+
+      axios.post('http://localhost:3031/howner/RegisterHostel',formData)
+      .then(res=>{
+        console.log(res.data)
+        setHostelReg(true);
+        navigate('/howner/profile')
+      })
+      .catch(err=>console.log(err))
+      
+    }else{
+      
+      const formData = new FormData();
+      //to idenftiy the hostel of the hostel owner using his uid cause his uid is the id of his hostel
+      const id = detail.id;
+      //here to get the seats data user have to submit form twice
+      //solved by: initially if user submit form then the seats value will be empty
+      //so api call only happen if the seats which is an object length >0 i.e not empty
+      if(Object.keys(seats).length>0){
+        formData.append('id',id)
+        formData.append('facilities',JSON.stringify(facilities))
+        formData.append('seats',JSON.stringify(seats))
+        formData.append('image',file)
+        console.log(seats)
+
+        axios.post('http://localhost:3031/howner/updateHostel',formData)
+        .then(res=>{
+          console.log(res.data);
+          navigate('/howner/profile');
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer:3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'Hostel Updated Successfully'
+          })
+        })
+        .catch(err=>console.log(err));
       }
-    });
-
-    const collectedSeats = hostelSeaterData.map((data) => {
-      return {
-        seat: data.seat,
-        tseat: data.tseat,
-        tprice: data.tprice,
-      };
-    });
-    setSeats(collectedSeats);
-
-    const formData = new FormData();
-    formData.append('name',name)
-    formData.append('address',address)
-    formData.append('people',people)
-    formData.append('tole',tole)
-    formData.append('type',type)
-    formData.append('rooms',rooms)
-    formData.append('facilities',JSON.stringify(facilities))
-    formData.append('seats',JSON.stringify(seats))
-    formData.append('image',file)
-
-    axios.post('http://localhost:3031/howner/RegisterHostel',formData)
-    .then(res=>{
-      console.log(res.data)
-      navigate('/howner/profile')
-    })
-    .catch(err=>console.log(err))
+    }
 
   }
   
@@ -122,6 +183,7 @@ const Register = () => {
         </div>
         <div className="hostel_info">
           <p>hostel information</p>
+          {!hostelReg && 
           <div className="hostel_info_inputs">
             <label htmlFor="name">
               <span>Name</span>
@@ -151,6 +213,7 @@ const Register = () => {
               <input onChange={e=>setRooms(e.target.value)} type="number" name="rooms" id="rooms" />
             </label>
           </div>
+          }
 
           <div className="hostel_seater">
             <p>available seater</p>
@@ -213,7 +276,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <input type="submit" value="Submit" />
+        {hostelReg?<input type="submit" value="Update"/>:<input type="submit" value="Submit" />}
       </form>
     </div>
   )

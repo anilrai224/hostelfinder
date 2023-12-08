@@ -23,7 +23,7 @@ const SLogin = () => {
     // console.log(email,password)
     axios.post("http://localhost:3031/login/hostel",values)
     .then(res=>{
-      console.log(res.data);
+      // console.log(res.data);
       if(res.data==='NotFound'){
         const Toast = Swal.mixin({
           toast: true,

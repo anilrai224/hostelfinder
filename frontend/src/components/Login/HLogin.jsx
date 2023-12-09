@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import {DetailContext} from '../detailProvider/DetailProvider'
 import './Login.css'
+import {AiFillEye} from 'react-icons/ai'
+import {VscEyeClosed} from 'react-icons/vsc'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
@@ -77,6 +79,18 @@ const SLogin = () => {
     })
     .catch(err=>console.log(err))
   }
+  const [showPassword,setShowPassword] = useState(true);
+  const showPass = (e) =>{
+    e.preventDefault();
+    const input = document.querySelector('.inputpassword');
+    if(showPassword){
+      input.type="text";
+      setShowPassword(false);
+    }else{
+      input.type="password";
+      setShowPassword(true);
+    }
+  }
   return (
     <div className='login'>
       <form onSubmit={handleSubmit}>
@@ -86,9 +100,13 @@ const SLogin = () => {
           <p>Email</p>
           <input onChange={handleInput} type="email" name="email" id="email" />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className='password'>
+        {showPassword
+            ?<AiFillEye className='show-pass' onClick={showPass}/>:
+             <VscEyeClosed className='show-pass' onClick={showPass}/>
+          }
           <p>Password</p>
-          <input onChange={handleInput} type="text" name="password" id="password" />
+          <input onChange={handleInput} className='inputpassword' type="text" name="password" id="password" />
         </label>
         <label htmlFor="submit">
           <input type="submit" value="Log In" />

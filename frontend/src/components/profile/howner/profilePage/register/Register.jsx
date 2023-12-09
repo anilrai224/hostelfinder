@@ -66,6 +66,7 @@ const Register = () => {
     });
   };
   
+  const [count,setCount] =useState(1);
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -95,73 +96,91 @@ const Register = () => {
           tprice: data.tprice,
         };
       });
-      // setSeats(collectedSeats);
       setSeats((prevSeats) => [...prevSeats, ...collectedSeats]);
-      // console.log(seats)
+      setCount((prev)=>prev+1)
 
-    if(!hostelReg){
-      const formData = new FormData();
-      //using same id of howner for his hostel 
-      const id=detail.id;
-      formData.append('id',id);
-      formData.append('name',name)
-      formData.append('address',address)
-      formData.append('people',people)
-      formData.append('tole',tole)
-      formData.append('type',type)
-      formData.append('rooms',rooms)
-      formData.append('facilities',JSON.stringify(facilities))
-      formData.append('seats',JSON.stringify(seats))
-      formData.append('image',file)
-
-      axios.post('http://localhost:3031/howner/RegisterHostel',formData)
-      .then(res=>{
-        console.log(res.data)
-        setHostelReg(true);
-        navigate('/howner/profile')
-      })
-      .catch(err=>console.log(err))
-      
-    }else{
-      
-      const formData = new FormData();
-      //to idenftiy the hostel of the hostel owner using his uid cause his uid is the id of his hostel
-      const id = detail.id;
-      //here to get the seats data user have to submit form twice
-      //solved by: initially if user submit form then the seats value will be empty
-      //so api call only happen if the seats which is an object length >0 i.e not empty
-      if(Object.keys(seats).length>0){
-        formData.append('id',id)
-        formData.append('facilities',JSON.stringify(facilities))
-        formData.append('seats',JSON.stringify(seats))
-        formData.append('image',file)
-        console.log(seats)
-
-        axios.post('http://localhost:3031/howner/updateHostel',formData)
-        .then(res=>{
-          console.log(res.data);
-          navigate('/howner/profile');
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer:3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+      //cause in single click i dont' get the updated seats values but in double click it does (needs' to be fixed)
+      if(count === 2){
+        if(!hostelReg){
+          const formData = new FormData();
+          //using same id of howner for his hostel 
+          const id=detail.id;
+          formData.append('id',id);
+          formData.append('name',name)
+          formData.append('address',address)
+          formData.append('people',people)
+          formData.append('tole',tole)
+          formData.append('type',type)
+          formData.append('rooms',rooms)
+          formData.append('facilities',JSON.stringify(facilities))
+          formData.append('seats',JSON.stringify(seats))
+          formData.append('image',file)
+          axios.post('http://localhost:3031/howner/RegisterHostel',formData)
+          .then(res=>{
+            console.log(res.data)
+            if(res.data === "registered"){
+              setHostelReg(true);
+              navigate('/howner/profile')
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer:3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Hostel Registered Successfully'
+              })
             }
           })
+          .catch(err=>console.log(err))
           
-          Toast.fire({
-            icon: 'success',
-            title: 'Hostel Updated Successfully'
-          })
-        })
-        .catch(err=>console.log(err));
+        }else{
+          
+          const formData = new FormData();
+          //to idenftiy the hostel of the hostel owner using his uid cause his uid is the id of his hostel
+          const id = detail.id;
+          //here to get the seats data user have to submit form twice
+          //solved by: initially if user submit form then the seats value will be empty
+          //so api call only happen if the seats which is an object length >0 i.e not empty
+          if(Object.keys(seats).length>0){
+            formData.append('id',id)
+            formData.append('facilities',JSON.stringify(facilities))
+            formData.append('seats',JSON.stringify(seats))
+            formData.append('image',file)
+            console.log(seats)
+    
+            axios.post('http://localhost:3031/howner/updateHostel',formData)
+            .then(res=>{
+              console.log(res.data);
+              navigate('/howner/profile');
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer:3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Hostel Updated Successfully'
+              })
+            })
+            .catch(err=>console.log(err));
+          }
+        }
       }
-    }
-
   }
   
   return (

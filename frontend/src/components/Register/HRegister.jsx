@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Register.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import {AiFillEye} from 'react-icons/ai'
+import {VscEyeClosed} from 'react-icons/vsc'  
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
@@ -27,9 +29,11 @@ const SRegister = () => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+    console.log(phone)
     axios
     .post('http://localhost:3031/register/hostel',{name,email,password,phone})
     .then(res=>{
+      console.log(res.data)
       navigate('/login/hostel');
       const Toast = Swal.mixin({
         toast: true,
@@ -50,6 +54,30 @@ const SRegister = () => {
     })
     .catch(err=>console.log(err));
   }
+  const [showPassword,setShowPassword] = useState(true);
+  const showPass = (e) =>{
+    e.preventDefault();
+    const input = document.querySelector('.inputpassword');
+    if(showPassword){
+      input.type="text";
+      setShowPassword(false);
+    }else{
+      input.type="password";
+      setShowPassword(true);
+    }
+  }
+  const [showCPassword,setShowCPassword] = useState(true);
+  const showCPass = (e)=>{
+    e.preventDefault();
+    const input = document.querySelector('.inputCpassword');
+    if(showCPassword){
+      input.type="text";
+      setShowCPassword(false);
+    }else{
+      input.type="password";
+      setShowCPassword(true);
+    }
+  }
   return (
     <div className='register'>
       <form onSubmit={handleSubmit}>
@@ -61,23 +89,31 @@ const SRegister = () => {
         </label>
         <label htmlFor="pnumber">
           <p>Phone Number</p>
-          <input required type="number" onChange={e=>setPhone(e.target.value)} name="pnumber" id="pnumber" />
+          <input required maxLength="10" pattern="[0-9]*" onChange={e=>setPhone(e.target.value)} name="pnumber" id="pnumber" />
         </label>
         <label htmlFor="email">
           <p>Email</p>
           <input onBlur={handleEmailFocus} focused={emailFocus.toString()} required type="email" onChange={e=>setEmail(e.target.value)} name="email" id="email"  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" />
           <span className='error'>Enter Valid Emai address</span>
         </label>
-        <label htmlFor="password">
-          <p>Password</p>
-          <input onBlur={handlePassFocus} focused={passFocus.toString()} required type="text" onChange={e=>setPassword(e.target.value)} name="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
-          <span className='error'>Minimum eight characters, at least one letter and one number</span>
-        </label>
-        <label htmlFor="cpassword">
-          <p>Confirm Password</p>
-          <input onBlur={handleConPassFocus} focused={conPassFocus.toString()} required type="text" name="cpassword" id="cpassword" pattern={password}/>
-          <span className='error'>Password Doesn't Match</span>
-        </label>
+        <label className='password' htmlFor="password">
+          {showPassword
+            ?<AiFillEye className='show-pass' onClick={showPass}/>:
+             <VscEyeClosed className='show-pass' onClick={showPass}></VscEyeClosed>
+            }
+            <p>Password</p>
+            <input onBlur={handlePassFocus} focused={passFocus.toString()} required type="password" onChange={e=>setPassword(e.target.value)} className='inputpassword' name="password" id="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"/>
+            <span className='error'>Minimum eight characters, at least one letter and one number</span>
+          </label>
+          <label className='Cpass' htmlFor="cpassword">
+            {showCPassword
+              ?<AiFillEye className='show-pass' onClick={showCPass}/>:
+               <VscEyeClosed className='show-pass' onClick={showCPass}></VscEyeClosed>
+              }
+              <p>Confirm Password</p>
+              <input className='inputCpassword' onBlur={handleConPassFocus} focused={conPassFocus.toString()} required type="password" name="cpassword" id="cpassword" pattern={password}/>
+              <span className='error'>Password Doesn't Match</span>
+          </label> 
         <label htmlFor="agreement" className='agreement'>
           <input required type="checkbox" name="agreement" id="agreement" />
           <p>I agree to <span>Platfroms Terms</span> of Service and <span>Privacy Policy</span></p>

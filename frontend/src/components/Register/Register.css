@@ -70,7 +70,17 @@ input[type='checkbox']:unchecked + .error{
 form .password{
     position: relative;
 }
-form .show-pass{
+form .Cpass{
+    position: relative;
+}
+form .Cpass .show-pass{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 20px;
+    color: var(--secondary);
+}
+form .password .show-pass{
     position: absolute;
     right: 10px;
     bottom: 5px;
@@ -79,7 +89,4 @@ form .show-pass{
 }
 form .show-pass:hover{
     cursor: pointer;
-}
-form .Cpass{
-    position: relative;
 }

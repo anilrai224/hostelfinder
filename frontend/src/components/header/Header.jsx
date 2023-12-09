@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from '../../images/logo.png';
 import { FaBars } from 'react-icons/fa';
@@ -11,32 +11,36 @@ const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const navRef = useRef();
 
-  const handleResize=()=>{
-    const width=window.innerWidth;
-    if(width<=729){
-      //taking all the nav list 
-      const navLinks = document.querySelectorAll('.nav__link')
-      navLinks.forEach((link)=>{
-        link.addEventListener('click',()=>{
-          document.querySelector('nav').classList.remove('responsive');
-          document.querySelector('.login__register').classList.remove('responsive');
-          setIsNavOpen(true);
+  useEffect(()=>{
+    const handleResize=()=>{
+      const width=window.innerWidth;
+      if(width<=729){
+        //taking all the nav list 
+        const navLinks = document.querySelectorAll('.nav__link')
+        navLinks.forEach((link)=>{
+          link.addEventListener('click',()=>{
+            document.querySelector('nav').classList.remove('responsive');
+            document.querySelector('.login__register').classList.remove('responsive');
+            setIsNavOpen(true);
+          })
         })
-      })
+      }
     }
-  }
-  window.addEventListener('resize',handleResize)
+    window.addEventListener('resize',handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  },[])
 
   
   const showNavBar = () => {
-    setIsNavOpen(!isNavOpen);
+    setIsNavOpen((prevIsNavOpen) => !prevIsNavOpen);
   };
   
   const {isLoggedIn,setIsLoggedIn,detail} = useContext(DetailContext);
   const loggedInType = localStorage.logintype;
   const navigate = useNavigate();
   const handleLogOut = ()=>{
-    console.log('logged out');
     setIsLoggedIn(false);
     navigate('/');
     localStorage.clear();
@@ -47,11 +51,21 @@ const Header = () => {
     document.querySelector('.login__register').classList.remove('responsive')
   }
 
-  if(!detail){
-    return <p>Loading.....</p>;
+  //defining image source  
+  useEffect(() => {
+    if (!detail) {
+      setIsLoggedIn(false);
+    }
+  }, [detail, setIsLoggedIn]);
+  
+  var imageSource;
+
+  if (isLoggedIn && detail && detail.image) {
+    imageSource = `http://localhost:3031/images/${detail.image}`;
+  } else {
+    imageSource = defaultProfile;
   }
-  //defining image source
-  const imageSource = detail.image ? `http://localhost:3031/images/${detail.image}` : defaultProfile;
+
   return (
     <header>
       <div className="container">

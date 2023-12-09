@@ -67,7 +67,6 @@ const Edit = () => {
       setFile(e.target.files[0])
       const image = document.getElementsByClassName("img")[0];
       const input = document.getElementsByClassName("input-img")[0];
-      console.log(image);
       image.src = URL.createObjectURL(input.files[0]);
     }
    

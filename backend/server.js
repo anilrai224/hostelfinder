@@ -93,7 +93,7 @@ app.post('/register/hostel',(req,res)=>{
     const values=[name,email,password,phone];
     db.query(sql,values,(err,data)=>{
         if(err){
-           return res.json('Error');
+           return res.json(err);
         }else{
             return res.json('registered');
         }
@@ -182,21 +182,18 @@ app.post('/user',(req,res)=>{
 })
 
 //accessing hostel owner account (when page is refreshed)
-app.post('/huser',(req,res)=>{
-    const {uid} = req.body;
-    sql= "SELECT * FROM howner where id = ?";
-    db.query(sql,[uid],(err,data)=>{
-        if(err){
-            return res.json("ERROR");
-        }else{
-            if(data.length>0){
-                return res.json(data[0])
-            }else{
-                return res.json("Not Found");
-            }
+app.post('/huser', (req, res) => {
+    const { uid } = req.body;
+    const sql = "SELECT * FROM howner where id = ?";
+    db.query(sql, [uid], (err, data) => {
+        if (err) {
+            return res.status(500).json("ERROR"); 
+        } else {
+            return res.json(data[0]);
         }
-    })
-})
+    });
+});
+
 
 //profile edit for student
 app.post('/student/account',upload.single('image'),(req,res)=>{
@@ -252,7 +249,6 @@ app.post('/student/security',(req,res)=>{
             return res.json("Error");
         }else{
             const userPassword = data[0].password;
-            // console.log(userPassword,cpassword,npassword);
             if(userPassword===cpassword){
                 const sql = "UPDATE student set password = ? where id =?";
                 db.query(sql,[npassword,id],(err,data)=>{
@@ -311,13 +307,12 @@ app.post('/howner/RegisterHostel', upload.single('image'), (req, res) => {
         res.status(500).json({ error: 'An error occurred' });
       } else {
         console.log('Data inserted into hostels table');
-        res.json('Hostel registered successfully');
         const query = "UPDATE howner set hostelReg = ? where id =?";
         db.query(query,[1,id],(err,result)=>{
             if(err){
                 res.status(500).json({error:'An error occured'})
             }else{
-                res.json("User Registered a Hostel");
+                res.json('registered');
             }
         })
       }
@@ -336,17 +331,13 @@ app.post('/howner/updateHostel',upload.single('image'),(req,res)=>{
     
     const query=`Update hostels set image=?, facilities = ?, seats_details =? where id = ?`
     const values = [image,JSON.stringify(parsedFacilities), JSON.stringify(parsedSeats),id]
-    console.log(values)
 
     // problem is value of parsedSeats is empty 
     db.query(query, values, (err, result) => {
         if (err) {
-            console.error('Error updating data:', err);
-            res.status(500).json({ error: 'An error occurred' });
+            return res.status(500).json({ error: 'An error occurred' });
         } else {
-            console.log('Data updated..');
-            console.log(values);
-            res.json('Hostel Updated successfully');
+            return res.json('Hostel Updated successfully');
         }
     });
 })

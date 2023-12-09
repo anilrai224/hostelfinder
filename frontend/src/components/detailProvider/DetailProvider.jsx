@@ -6,7 +6,7 @@ export const DetailContext  = createContext(null);
 export const DetailProvider = (props) => {
 
   const [loggedInType,setLoggedInType] = useState();
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState();
   const [detail,setDetail] = useState();//for student
 
   const [hostelReg,setHostelReg] = useState(false);
@@ -15,14 +15,13 @@ export const DetailProvider = (props) => {
   const navigate = useNavigate();
   useEffect(()=>{
     const loginType = localStorage.logintype;
-    const isLoggedInUser = localStorage.loginStatus;
+    const isLoggedInUser = localStorage.loginStatus === 'true';
     setIsLoggedIn(isLoggedInUser);
     const uid=localStorage.getItem('uid');
 
-    if(loginType==='student'){
+    if(loginType === 'student'){
       axios.post('http://localhost:3031/user',{uid})
       .then(res=>{
-        // console.log(res.data)
         setDetail(res.data);
         const loginStatus = localStorage.getItem('loginStatus');
         setIsLoggedIn(loginStatus);
@@ -30,20 +29,23 @@ export const DetailProvider = (props) => {
         setLoggedInType(logintype)
       })
       .catch(err=>console.log(err));
-    }else{
+    }else if(loginType === 'howner'){
       axios.post('http://localhost:3031/huser',{uid})
       .then(res=>{
         setDetail(res.data);
-        if(res.data.hostelReg === 1){
-          setHostelReg(true);
-        }else{
-          setHostelReg(false);
-        }
+          if(res.data.hostelReg === 1){
+            setHostelReg(true);
+          }else{
+            setHostelReg(false);
+          }
         const loginStatus = localStorage.getItem('loginStatus');
         setIsLoggedIn(loginStatus);
         const logintype=localStorage.getItem('logintype');
         setLoggedInType(logintype)
       })
+      .catch(err=>console.log(err))
+    }else{
+      setIsLoggedIn(false);
     }
     const type = localStorage.getItem('logintype');
     if(type === 'howner' && location.pathname.includes('student')){

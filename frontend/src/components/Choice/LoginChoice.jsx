@@ -10,8 +10,16 @@ const LoginChoice = () => {
   }
   return (
     <div className='choices'>
-      <NavLink name="student" onClick={display} to='/login/student' className='choice'>as a Student</NavLink>
-      <NavLink name="howner" onClick={display} to='/login/hostel' className='choice'>as a Hostel Owner</NavLink>
+      <div className="container">
+        <div className="choiceContainer">
+         <div className="choice">
+          <NavLink name="student" onClick={display} to='/login/student' className='choiceLink'>as a Student</NavLink>
+         </div>
+          <div className="choice">
+            <NavLink name="howner" onClick={display} to='/login/hostel' className='choiceLink'>as a Hostel Owner</NavLink>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
